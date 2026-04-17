@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+                <h3 class="fw-bold text-center mb-4">Crea tu cuenta</h3>
+                <form method="POST" action="{{url_for('registro')}}">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label small fw-bold">NOMBRE COMPLETO</label>
+                            <input type="text" name="nombre" class="form-control bg-light border-0" required>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label small fw-bold">CORREO ELECTRÓNICO</label>
+                            <input type="email" name="email" class="form-control bg-light border-0" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label small fw-bold">CONTRASEÑA</label>
+                            <input type="password" class="form-control bg-light border-0" name="contraseña" minlength="8" required>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label class="form-label small fw-bold">CONFIRMAR</label>
+                            <input type="password" class="form-control bg-light border-0" name="confirmarcontra" minlength="8" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 p-3 fw-bold rounded-3">Crear mi cuenta</button>
+                </form>
+                <div class="text-center mt-4">
+                    <span class="small text-muted">¿Ya tienes cuenta? <a href="{{url_for('login')}}" class="text-primary text-decoration-none fw-bold">Inicia sesión</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
