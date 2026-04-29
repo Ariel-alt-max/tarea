@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow border-0" style="border-radius: 15px;">
+            <div class="card-body p-5">
+                
+                <div class="text-center mb-4">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                        {{ usuario.nombre[0] | upper }}
+                    </div>
+                    <h2 class="fw-bold text-dark mb-1">Mi Perfil</h2>
+                    <p class="text-muted small text-uppercase fw-bold">Información de la cuenta</p>
+                </div>
+
+                <div class="mb-4">
+                    <div class="p-3 mb-2 bg-light rounded-3 d-flex align-items-center">
+                        <div class="me-3 text-primary">👤</div>
+                        <div>
+                            <small class="text-muted d-block" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Nombre</small>
+                            <span class="fw-bold text-dark">{{ usuario.nombre }}</span>
+                        </div>
+                    </div>
+
+                    <div class="p-3 mb-2 bg-light rounded-3 d-flex align-items-center">
+                        <div class="me-3 text-primary">✉️</div>
+                        <div>
+                            <small class="text-muted d-block" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Correo electrónico</small>
+                            <span class="fw-bold text-dark">{{ usuario.email }}</span>
+                        </div>
+                    </div>
+
+                    <div class="p-3 mb-4 bg-light rounded-3 d-flex align-items-center">
+                        <div class="me-3 text-primary">📅</div>
+                        <div>
+                            <small class="text-muted d-block" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Miembro desde</small>
+                            <span class="fw-bold text-dark">{{ usuario.fecha_registro.strftime('%d de %B, %Y') }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('editar_usuario') }}" class="btn btn-primary p-3 fw-bold shadow-sm" style="border-radius: 10px;">
+                        ✏️ Editar Información
+                    </a>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary p-3 fw-bold" style="border-radius: 10px;">
+                        Volver al Dashboard
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

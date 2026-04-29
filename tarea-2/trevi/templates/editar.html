@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow border-0" style="border-radius: 15px;">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-dark">Editar Perfil</h2>
+                    <p class="text-muted">Actualiza tu información personal</p>
+                </div>
+
+                <form action="{{url_for('editar_usuario')}}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold text-uppercase text-secondary">Nombre Completo</label>
+                        <input type="text" name="nombre" class="form-control bg-light border-0 p-3" 
+                               value="{{usuario.nombre}}" style="border-radius: 10px;" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-uppercase text-secondary">Correo electrónico</label>
+                        <input type="email" name="email" class="form-control bg-light border-0 p-3" 
+                               value="{{usuario.email}}" style="border-radius: 10px;" required>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary p-3 fw-bold shadow-sm" style="border-radius: 10px;">
+                            💾 Guardar cambios
+                        </button>
+                        <a href="{{url_for('dashboard')}}" class="btn btn-outline-secondary p-3 fw-bold" style="border-radius: 10px;">
+                            Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <p class="small text-muted">
+                ¿Necesitas cambiar tu contraseña? <br>
+                <span class="text-primary fw-bold" style="cursor:pointer;">Contacta al soporte</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control:focus {
+        background-color: #fff !important;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);
+        border: 1px solid #0d6efd;
+    }
+</style>
+{% endblock %}

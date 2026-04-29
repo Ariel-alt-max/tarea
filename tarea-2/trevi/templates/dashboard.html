@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-4 mb-4">
+        <div class="card shadow-sm border-0 sticky-top" style="top: 20px;">
+            <div class="card-body p-4">
+                <h5 class="card-title fw-bold mb-3 text-primary">✨ Crear Tarea</h5>
+                <form method="POST" action="{{url_for('crear_tarea')}}">
+                    <div class="mb-3">
+                        <input type="text" name="titulo" class="form-control form-control-lg fs-6" placeholder="¿Qué hay que hacer?" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea name="descripcion" class="form-control" placeholder="Añade una descripción (opcional)..." rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 fw-bold shadow-sm">Guardar Tarea</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+        <h5 class="text-dark fw-bold mb-3 d-flex align-items-center">
+            📌 Pendientes 
+            <span class="badge bg-primary ms-2 rounded-pill">{{ pendientes|length }}</span>
+        </h5>
+        
+        {% for tarea in pendientes %}
+            <div class="card shadow-sm border-0 mb-3 card-hover">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-1">{{ tarea.titulo }}</h6>
+                    {% if tarea.descripcion %}
+                        <p class="text-muted small mb-3">{{ tarea.descripcion }}</p>
+                    {% else %}
+                        <p class="text-muted small mb-3 italic">Sin descripción</p>
+                    {% endif %}
+                    
+                    <div class="d-flex justify-content-end">
+                        <a href="{{url_for('completar_tarea', tarea_id=tarea._id)}}" class="btn btn-sm btn-outline-success fw-bold rounded-pill px-3">
+                            ✓ Completar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="text-center py-5 bg-white rounded-4 shadow-sm border">
+                <p class="text-muted mb-0">¡Todo al día! ☕</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-lg-4 mb-4">
+        <h5 class="text-success fw-bold mb-3">✅ Completadas</h5>
+        <div class="opacity-75">
+            {% for tarea in completadas %}
+                <div class="card border-0 mb-2 bg-light shadow-none">
+                    <div class="card-body py-2">
+                        <h6 class="mb-0 text-decoration-line-through small fw-bold text-success">{{ tarea.titulo }}</h6>
+                        {% if tarea.descripcion %}
+                            <p class="mb-0 text-muted small text-decoration-line-through">{{ tarea.descripcion }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="text-center py-4 bg-light rounded-4 border-dashed" style="border: 2px dashed #dee2e6;">
+                    <p class="text-muted small mb-0">Aún no hay tareas terminadas.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-hover:hover {
+        transform: translateY(-3px);
+        transition: all 0.3s ease;
+    }
+    .border-dashed {
+        background-color: transparent !important;
+    }
+</style>
+{% endblock %}
